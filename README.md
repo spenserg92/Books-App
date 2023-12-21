@@ -1,5 +1,5 @@
 # Books-App
-An app to create a list of books and keep track of favorite books.
+An app to create a list of books and keep track of favorite books as well as add reviews to books.
 
 # User Stories
 
@@ -7,14 +7,16 @@ An app to create a list of books and keep track of favorite books.
   - As a user, I want the ability to sign in. 
   - As a user, I want the ability to change my password. 
   - As a user, I want the ability to sign out. 
-  - As a user, I want the ability to create my own books. 
+  - As a user, I want the ability to add my own books to a list. 
   - As a user, I want the ability to update my books. 
+  - As a user, I want the ability to view all books in a list. 
   - As a user, I want the ability to view all of my books in a list. 
   - As a user, I want the ability to read more details of individual books. 
   - As a user, I want the ability to delete my books. 
   - As a user, I want the ability to view books others have created. 
   - As a user, I want the ability to favorite books that other people have created. 
-  - As a user, I want the ability to remove recipes from my favorites. 
+  - As a user, I want the ability to remove books from my favorites.
+  - As a user, I want the ability to add reviews to books.
 
 # Wireframes
 
