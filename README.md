@@ -28,4 +28,6 @@ An app to create a list of books and keep track of favorite books as well as add
 
 # ERD
 
-![Screenshot 2023-12-20 at 9 08 40 PM](https://github.com/spenserg92/Books-App/assets/149332042/c5775b68-ef2d-4219-9418-06f7ef7de8a2)
+![Screenshot 2023-12-21 at 9 14 14 AM](https://github.com/spenserg92/Books-App/assets/149332042/6f4f5525-eef0-4e70-be46-0ef9637fa548)
+
+
