@@ -8,7 +8,6 @@ router.get('/',(req, res) => {
     Book.find()
         .then(result => {
             res.render('books/index', { books: result, username, userId, loggedIn})
-
         })
         .catch(err => {
             console.log('error')
@@ -16,6 +15,17 @@ router.get('/',(req, res) => {
         })
 } )
 
+router.get('/new', (req, res) => {
+    const { username, loggedIn, userId } = req.session;
+    Book.find()
+    .then(result => {
+        res.render('books/new', { books: result, username, userId, loggedIn});
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+});
 
 
 
