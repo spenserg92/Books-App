@@ -51,10 +51,10 @@ router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     Book.findById(req.params.id)
     .then((result) => {
-        res.render('books/show', { books: result, username, userId, loggedIn} )
+        res.render('books/show', { book: result, username, userId, loggedIn} )
     })
     .catch(err => {
-        console.log('error')
+        console.log('error', err)
         res.redirect(`/error?error=${err}`)
     })
 })
