@@ -2,7 +2,7 @@ const express = require('express')
 const Book = require('../models/book')
 
 const router = express.Router()
-
+//GET -> /Index
 router.get('/',(req, res) => {
     const { username, loggedIn, userId } = req.session
     Book.find()
@@ -15,6 +15,7 @@ router.get('/',(req, res) => {
         })
 } )
 
+// GET -> /books/new
 router.get('/new', (req, res) => {
     const { username, loggedIn, userId } = req.session;
     Book.find()
@@ -27,6 +28,7 @@ router.get('/new', (req, res) => {
     })
 });
 
+//CREATE -> add book to index
 router.post('/', (req, res) => {
     const { username, loggedIn, userId } = req.session;
     const newBook = req.body;
@@ -43,7 +45,19 @@ router.post('/', (req, res) => {
 })
 
 
+// SHOW - Show more info about one book
 
+router.get('/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    Book.findById(req.params.id)
+    .then((result) => {
+        res.render('books/show', { books: result, username, userId, loggedIn} )
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+})
 
 
 module.exports = router

@@ -4,8 +4,8 @@
     <div class="container row text-center">
         <% books.forEach(function(b) {%>
         <div>
-            <%= b.title %>
-
+            <h5><%= b.title %></h5>
+            <a href="/books/<%= b.title %>" class="btn">More Info</a>
         </div>
         <% }) %>  
     </div>
