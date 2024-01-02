@@ -1,11 +1,14 @@
 <%- include('../partials/header') %>
 
-<div>
-    <% books.forEach(function(b) {%>
+<div class="container center">
+    <div class="container row text-center">
+        <% books.forEach(function(b) {%>
         <div>
             <%= b.title %>
+
         </div>
-    <% }) %>    
+        <% }) %>  
+    </div>
 </div>
 
 

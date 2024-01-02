@@ -27,6 +27,21 @@ router.get('/new', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+    const { username, loggedIn, userId } = req.session;
+    const newBook = req.body;
+    newBook.owner = userId;
+
+    Book.create(newBook)
+        .then(newBook => {
+            res.redirect('/books/new')
+        })
+        .catch(err => {
+            console.log('error')
+            res.redirect(`/error?error=${err}`)
+        })
+})
+
 
 
 
