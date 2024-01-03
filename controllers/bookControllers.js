@@ -43,7 +43,20 @@ router.post('/', (req, res) => {
             res.redirect(`/error?error=${err}`)
         })
 })
+// GET -> /books/mine
+// displays user's saved books
 
+router.get('/mine', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    Book.find({owner: userId})
+        .then(userBooks => {
+            res.render('books/mine', {books: userBooks, username, loggedIn, userId})
+        })
+        .catch(err => {
+            console.log('error')
+            res.redirect(`/error?error=${err}`)
+        })
+})
 
 // SHOW - Show more info about one book
 

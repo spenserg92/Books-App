@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+    <div class="container center">
+        <h2>All <%= username %>'s Books</h2>
+        <% books.forEach(function(b) {%>
+            <div>
+                <h5>
+                    <%= b.title %>
+                </h5>
+                <a href="/books/<%= b.id %>" class="btn btn-outline-info">More Info</a>
+            </div>
+            <% }) %>
+                <a href="/books" class="btn btn-primary">Back to All Books</a>
+    </div>
+
+    <%- include('../partials/footer') %>
