@@ -83,6 +83,12 @@ router.delete('/logout', (req, res) =>{
 
 })
 
+router.put('/addbook', async (req, res)=>{
+    const { username, loggedIn, userId } = req.session
+    const foundUser = await User.findOne({username})
+    console.log('Look Here', foundUser)
+})
+
 
 /// Export Router /// 
 module.exports = router

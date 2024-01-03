@@ -6,6 +6,16 @@
     <h2><%= book.author %></h2>
     <h2><%= book.publishedDate %></h2>
 </div>
+<% if (loggedIn) {%>
+    <h5>Add this to your books?</h5>
+    <form action="/users/addbook?_method=PUT"  method="POST">
+        <input hidden type="text" name="author" value="<%= book.author %>">
+        <input hidden type="text" name="title" value="<%= book.title %>">
+        <input type="submit" class="btn btn-primary" value="Add Book">
+    </form>
+    <% } else { %>
+        <p>Log in to add a book!</p>
+        <% } %>
+<hr>
 <a href="/books" class="btn btn-primary">Back to All Books</a>
-
 <%- include('../partials/footer') %>

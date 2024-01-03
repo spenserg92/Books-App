@@ -15,7 +15,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    books: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Book'
+    }]
 })
 
 /// Create User Model ///

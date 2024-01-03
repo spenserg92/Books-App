@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
             res.redirect('/books/new')
         })
         .catch(err => {
-            console.log('error')
+            console.log('error', err)
             res.redirect(`/error?error=${err}`)
         })
 })
@@ -53,7 +53,23 @@ router.get('/mine', (req, res) => {
             res.render('books/mine', {books: userBooks, username, loggedIn, userId})
         })
         .catch(err => {
-            console.log('error')
+            console.log('error', err)
+            res.redirect(`/error?error=${err}`)
+        })
+})
+
+//POST -> adds book to user's saved books
+router.post('/add', (req, res) => {
+    const { username, loggedIn, userId } = req.session;
+    const newBook = req.body;
+    newBook.owner = userId;
+    console.log('Look here', newBook)
+    Book.create(newBook)
+        .then(newBook => {
+            res.redirect('/books/mine')
+        })
+        .catch(err => {
+            console.log('error', err)
             res.redirect(`/error?error=${err}`)
         })
 })
