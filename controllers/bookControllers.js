@@ -1,5 +1,6 @@
 const express = require('express')
 const Book = require('../models/book')
+const User = require('../models/user')
 
 const router = express.Router()
 //GET -> /Index
@@ -58,21 +59,21 @@ router.get('/mine', (req, res) => {
         })
 })
 
-//POST -> adds book to user's saved books
-router.post('/add', (req, res) => {
-    const { username, loggedIn, userId } = req.session;
-    const newBook = req.body;
-    newBook.owner = userId;
-    console.log('Look here', newBook)
-    Book.create(newBook)
-        .then(newBook => {
-            res.redirect('/books/mine')
-        })
-        .catch(err => {
-            console.log('error', err)
-            res.redirect(`/error?error=${err}`)
-        })
-})
+// //POST -> adds book to user's saved books
+// router.post('/add', (req, res) => {
+//     const { username, loggedIn, userId } = req.session;
+//     const newBook = req.body;
+//     newBook.owner = userId;
+//     console.log('Look here', newBook)
+//     Book.create(newBook)
+//         .then(newBook => {
+//             res.redirect('/books/mine')
+//         })
+//         .catch(err => {
+//             console.log('error', err)
+//             res.redirect(`/error?error=${err}`)
+//         })
+// })
 
 // SHOW - Show more info about one book
 
@@ -86,6 +87,17 @@ router.get('/:id', (req, res) => {
         console.log('error', err)
         res.redirect(`/error?error=${err}`)
     })
+})
+
+router.put('/:id', async (req, res)=>{
+    const { username, loggedIn, userId } = req.session
+    const foundUser = await User.findOne({username})
+    console.log('Look Here', req.params.id)
+    console.log('here', req.params.id)
+    foundUser.books.push(req.params.id)
+    await foundUser.save()
+    console.log('This is the user',foundUser)
+    res.redirect('/books/mine')
 })
 
 
