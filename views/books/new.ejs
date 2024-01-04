@@ -1,17 +1,20 @@
 <%- include('../partials/header') %>
 
-<div class="container center">
-    <h2>Add Book</h2>
+    <div class="container center">
+        <h2>Add Book</h2>
+        <div class="container d-inline-flex justify-content-center">
+            <form class="mb-3" action="/books" method="post">
+                <fieldset class="form-control">
+                    <label class="form-label" >Title <input class="form-control" type="text" name="title"></label>
+                    <label>Genre <input class="form-control" type="text" name="genre"></label>
+                    <label>Author <input class="form-control" type="text" name="author"></label>
+                    <label>Published Date <input class="form-control" type="datetime-local" name="publishedDate"></label>
+                    <hr>
+                    <input type="submit" class="btn btn-success" value="Add Book">
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
-    <form action="/books" method="post">
-        <label>Title <input type="text" name="title"></label>
-        <label>Genre <input type="text" name="genre"></label>
-        <label>Author <input type="text" name="author"></label>
-        <label>Published Date <input type="datetime-local" name="publishedDate"></label>
-        <hr>
-        <input type="submit" class="btn btn-success" value="Add Book">
-    </form>
-</div>
 
-
-<%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>

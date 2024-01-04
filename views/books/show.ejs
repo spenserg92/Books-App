@@ -2,10 +2,25 @@
 
 <div class="container">
     <h2><%= book.title %></h2>
-    <h2><%= book.genre %></h2>
-    <h2><%= book.author %></h2>
-    <h2><%= book.publishedDate %></h2>
-</div>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Author</th>
+                <th scope="col">Pulished</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"><%= book.title %></td>
+                <td scope="row"><%= book.genre %></td>
+                <td scope="row"><%= book.author %></td>
+                <td scope="row"><%= book.publishedDate %></td>
+            </tr>
+        </tbody>
+    </table>
+
 <% if (loggedIn) {%>
     <h5>Add this to your books?</h5>
     <form action="/books/<%= book._id %>?_method=PUT"  method="POST">
@@ -19,3 +34,4 @@
 <hr>
 <a href="/books" class="btn btn-primary">Back to All Books</a>
 <%- include('../partials/footer') %>
+</div>

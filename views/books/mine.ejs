@@ -2,17 +2,30 @@
 
     <div class="container center">
         <h2>All <%= username %>'s Books</h2>
-        <% books.forEach(function(b) {%>
-            <div>
-                <h5>
-                    <%= b.title %>
-                </h5>
-                <a href="/books/<%= b.id %>" class="btn btn-primary">More Info</a>
-            </div>
-            <% }) %>
-
-            <br>
-                <a href="/books" class="btn btn-primary">Back to All Books</a>
+        <hr>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% books.forEach(function(b) {%>
+                    <tr>
+                        <td scope="row">
+                            <a href="/books/<%= b.id %>" class="btn btn-primary"><%= b.title %></a>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                    
+                    <% }) %>
+                    
+            </tbody>
+        </table>
+        <br>
+        <a href="/books" class="btn btn-primary">Back to All Books</a>
     </div>
 
     <%- include('../partials/footer') %>
