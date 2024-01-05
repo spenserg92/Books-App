@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<div class="container">
+<div class="container center text-center">
     <h2><%= book.title %></h2>
     <table class="table table-striped mt-3">
         <thead>
@@ -37,6 +37,23 @@
         <p>Log in to add a book!</p>
         <% } %>
 
+    <br><br><h2>Reviews</h2>
+    <form id="add-review-form" method="POST"
+        action="/books/<%= book._id %>/reviews">
+        <label>Review:</label>
+        <textarea name="content"></textarea>
+        <label>Rating:</label>
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="submit" value="Add Review">
+    </form>
+
+
         <% if (book.owner == userId) {%>
             <hr>
             <div class="container d-inline-flex justify-content-center">
@@ -56,5 +73,5 @@
         <% } %>
 <hr>
 <a href="/books" class="btn btn-primary">Back to All Books</a>
-<%- include('../partials/footer') %>
 </div>
+<%- include('../partials/footer') %>

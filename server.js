@@ -8,6 +8,7 @@ const middleware = require('./utils/middleware')
 /// Import Routers ///
 const UserRouter = require('./controllers/userControllers')
 const BookRouter = require('./controllers/bookControllers')
+const ReviewRouter = require('./controllers/reviewsController')
 
 
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', UserRouter)
 app.use('/books', BookRouter)
+app.use('/reviews', ReviewRouter)
 
 
 /// Server Listener ///

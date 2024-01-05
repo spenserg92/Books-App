@@ -60,12 +60,12 @@ router.get('/mine', async (req, res) => {
         })
 })
 
-// //POST -> adds book to user's saved books
+//POST -> adds book to user's saved books
 router.post('/add', async (req, res) => {
     const { username, loggedIn, userId } = req.session;
     const newBook = req.body;
     const user = await User.findById(userId).populate('books')
-    console.log(user.books.length, newBook.id)
+    // console.log(user.books.length, newBook.id)
     user.books.push(newBook.id)
     user.books = Array.from(new Set(user.books))
     await user.save()

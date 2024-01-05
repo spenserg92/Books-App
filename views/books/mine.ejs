@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-    <div class="container center">
+    <div class="center row text-center">
         <h2>All <%= username %>'s Books</h2>
         <hr>
         <table class="table table-striped mt-3">
@@ -18,10 +18,17 @@
                     </tr>
                     <% }) %>
                     
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            
+                            <a href="/books" class="btn btn-info">Back to All Books</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <br>
-        <a href="/books" class="btn btn-primary">Back to All Books</a>
     </div>
 
     <%- include('../partials/footer') %>
