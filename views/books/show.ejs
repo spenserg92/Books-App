@@ -23,10 +23,16 @@
 
 <% if (loggedIn) {%>
     <h5>Add this to your books?</h5>
+    <% if (user.books.indexOf(book.id) === -1) { %>
     <form action="/books/add" method="POST">
         <input hidden type="text" name="id" value="<%= book.id %>">
         <input type="submit" class="btn btn-primary" value="Add Book">
     </form>
+    <% } else { %>
+    <form action="/books/remove/<%= book.id %>?_method=DELETE" method="POST">
+        <input type="submit" class="btn btn-primary" value="Remove Book">
+    </form>
+    <% } %>
     <% } else { %>
         <p>Log in to add a book!</p>
         <% } %>
