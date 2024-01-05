@@ -12,7 +12,9 @@ const bookSchema = {
         type: String,
         required: true,
     },
-    publishedDate: { type: Date },
+    publishedDate: { 
+        type: Date,
+    },
     imgCover: { type: String },
     owner: {
         type: Schema.Types.ObjectId,

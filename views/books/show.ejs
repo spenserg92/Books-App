@@ -23,13 +23,30 @@
 
 <% if (loggedIn) {%>
     <h5>Add this to your books?</h5>
-    <form action="/books/<%= book._id %>?_method=PUT"  method="POST">
-        <input hidden type="text" name="author" value="<%= book.author %>">
-        <input hidden type="text" name="title" value="<%= book.title %>">
+    <form action="/books/add" method="POST">
+        <input hidden type="text" name="id" value="<%= book.id %>">
         <input type="submit" class="btn btn-primary" value="Add Book">
     </form>
     <% } else { %>
         <p>Log in to add a book!</p>
+        <% } %>
+
+        <% if (book.owner == userId) {%>
+            <hr>
+            <div class="container d-inline-flex justify-content-center">
+                <form class="me-3" action="/books/update/<%= book._id %>?_method=PUT" method="POST">
+                    <fieldset class="form-control">
+                        <input  type="text" name="title" value="<%= book.title %>">
+                        <input  type="text" name="genre" value="<%= book.genre %>">
+                        <input  type="text" name="author" value="<%= book.author %>">
+                        <input  type="text" name="publishedDate" value="<%= book.publishedDate %>">
+                        <input type="submit" class="btn btn-success" value="Update Book">
+                    </fieldset>
+                </form>
+                <form class="me-3" action="/books/delete/<%= book._id %>?_method=DELETE" method="POST">
+                    <input type="submit" class="btn btn-danger" value="Delete this book">
+                </form>
+            </div>
         <% } %>
 <hr>
 <a href="/books" class="btn btn-primary">Back to All Books</a>

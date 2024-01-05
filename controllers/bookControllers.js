@@ -47,34 +47,30 @@ router.post('/', (req, res) => {
 // GET -> /books/mine
 // displays user's saved books
 
-router.get('/mine', (req, res) => {
+router.get('/mine', async (req, res) => {
     const { username, loggedIn, userId } = req.session
-    Book.find({owner: userId})
-        .then(userBooks => {
-            console.log('user id', userId)
-            res.render('books/mine', {books: userBooks, username, loggedIn, userId})
-        })
-        .catch(err => {
-            console.log('error', err)
-            res.redirect(`/error?error=${err}`)
-        })
+    const user = await User.findById(userId).populate('books')
+    Book.find({_id: { $in: user.books }})
+    .then(userBooks => {
+        res.render('books/mine', {books: userBooks, username, loggedIn, userId})
+    })
+    .catch(err => {
+        console.log('error', err)
+        res.redirect(`/error?error=${err}`)
+    })
 })
 
 // //POST -> adds book to user's saved books
-// router.post('/add', (req, res) => {
-//     const { username, loggedIn, userId } = req.session;
-//     const newBook = req.body;
-//     newBook.owner = userId;
-//     console.log('Look here', newBook)
-//     Book.create(newBook)
-//         .then(newBook => {
-//             res.redirect('/books/mine')
-//         })
-//         .catch(err => {
-//             console.log('error', err)
-//             res.redirect(`/error?error=${err}`)
-//         })
-// })
+router.post('/add', async (req, res) => {
+    const { username, loggedIn, userId } = req.session;
+    const newBook = req.body;
+    const user = await User.findById(userId).populate('books')
+    console.log(user.books.length, newBook.id)
+    user.books.push(newBook.id)
+    user.books = Array.from(new Set(user.books))
+    await user.save()
+    res.redirect('/books/mine')
+})
 
 // SHOW - Show more info about one book
 
@@ -107,7 +103,7 @@ router.put('/update/:id', (req, res) =>{
             }
         })
         .then(returnedBook => {
-            res.redirect(`/books/mine/${bookId}`)
+            res.redirect(`/books/${bookId}`)
         })
         .catch(err => {
             console.log('error', err)
@@ -116,16 +112,15 @@ router.put('/update/:id', (req, res) =>{
 
 })
 
-router.put('/:id', async (req, res)=>{
-    const { username, loggedIn, userId } = req.session
-    const foundUser = await User.findOne({username})
-    // console.log('Look Here', req.params.id)
-    // console.log('here', req.params.id)
-    foundUser.books.push(req.params.id)
-    await foundUser.save()
-    console.log('This is the user',foundUser)
-    res.redirect('/books/mine')
-})
+// router.put('/:id', async (req, res)=>{
+//     const { username, loggedIn, userId } = req.session
+//     const foundUser = await User.findOne({username})
+//     // console.log('Look Here', req.params.id)
+//     foundUser.books.push(req.params.id)
+//     await foundUser.save()
+//     console.log('This is the user',foundUser)
+//     res.redirect('/books/mine')
+// })
 
 
 module.exports = router
