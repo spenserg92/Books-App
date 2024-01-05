@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', UserRouter)
 app.use('/books', BookRouter)
-app.use('/reviews', ReviewRouter)
+app.use('/', ReviewRouter)
 
 
 /// Server Listener ///

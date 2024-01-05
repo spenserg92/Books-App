@@ -1,12 +1,17 @@
 const express = require('express')
 const Book = require('../models/book')
 const User = require('../models/user')
+
+
 const router = express.Router()
 
-router.post('/:id/reviews', async (req, res) => {
-    const book = await Book.findById(req.params.id)
-    req.body.user = req.user._id
-    req.body.userName = req.user.userName
+router.post('/reviews/:id', async (req, res) => {
+    const { username, loggedIn, userId } = req.session;
+    const book = await Book.findById(req.params.id).populate('reviews')
+    const newReview = req.body;
+    console.log('this is the book', book)
+    // req.body.reviewer = req.reviewer._id
+    // req.body.userName = req.user.userName
 
     book.reviews.push(req.body);
     try{
@@ -14,11 +19,8 @@ router.post('/:id/reviews', async (req, res) => {
     } catch (err) {
         console.log(err)
     }
-    res.redirect(`/books/${book._id}`)
+    res.redirect(`/books/${book.id}`)
 })
-
-
-
 
 
 module.exports = router
