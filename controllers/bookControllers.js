@@ -101,8 +101,6 @@ router.put('/update/:id', (req, res) =>{
             } else {
                 res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Update%20this%20Place`)
             }
-        })
-        .then(returnedBook => {
             res.redirect(`/books/${bookId}`)
         })
         .catch(err => {
@@ -112,15 +110,31 @@ router.put('/update/:id', (req, res) =>{
 
 })
 
-// router.put('/:id', async (req, res)=>{
-//     const { username, loggedIn, userId } = req.session
-//     const foundUser = await User.findOne({username})
-//     // console.log('Look Here', req.params.id)
-//     foundUser.books.push(req.params.id)
-//     await foundUser.save()
-//     console.log('This is the user',foundUser)
-//     res.redirect('/books/mine')
-// })
+// Delete -> /books/delete
+
+router.delete('/delete/:id', (req, res) =>{
+    const { username, loggedIn, userId } = req.session
+    const bookId = req.params.id
+    Book.findById(bookId)
+    .then(book => {
+        if (book.owner == userId) {
+            console.log("deleted book")
+            return book.deleteOne()
+        
+        } else {
+            res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Book`)
+        }
+        
+    })
+    .then(deletedBook => {
+        res.redirect('/books')
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+})
+
 
 
 module.exports = router
