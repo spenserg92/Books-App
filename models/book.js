@@ -9,10 +9,6 @@ const reviewSchema = new Schema ({
         ref: 'User',
         required: true
     },
-    book: {type: Schema.Types.ObjectId,
-        ref: 'Book',
-        // required: true
-    },
     review: {
         type: String,
     },
@@ -21,9 +17,6 @@ const reviewSchema = new Schema ({
         min: 1,
         max: 5
     },
-    hasRead: {
-        type: Boolean,
-    }
 })
 
 

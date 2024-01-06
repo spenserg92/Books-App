@@ -77,8 +77,14 @@ router.post('/add', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { username, loggedIn, userId } = req.session
     const user = await User.findById(userId)
-    Book.findById(req.params.id)
-        .then((result) => {
+    Book.findById(req.params.id).populate({
+        path: 'reviews',
+        populate: {
+            path: 'reviewer',
+            model: 'User'
+        }
+    })
+        .then(async (result) => {
             res.render('books/show', { book: result, user: user, username, userId, loggedIn })
         })
         .catch(err => {

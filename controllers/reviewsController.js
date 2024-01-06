@@ -9,11 +9,11 @@ router.post('/reviews/:id', async (req, res) => {
     const { username, loggedIn, userId } = req.session;
     const book = await Book.findById(req.params.id).populate('reviews')
     const newReview = req.body;
+    newReview.reviewer = await User.findById(userId)
     console.log('this is the book', book)
-    // req.body.reviewer = req.reviewer._id
-    // req.body.userName = req.user.userName
 
-    book.reviews.push(req.body);
+
+    book.reviews.push(newReview);
     try{
         await book.save();
     } catch (err) {
