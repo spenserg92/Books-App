@@ -16,7 +16,7 @@
                 <td scope="row"><%= book.title %></td>
                 <td scope="row"><%= book.genre %></td>
                 <td scope="row"><%= book.author %></td>
-                <td scope="row"><%= book.publishedDate %></td>
+                <td scope="row"><%= book.publishedDate.toISOString().split('T')[0] %></td>
             </tr>
         </tbody>
     </table>
@@ -39,15 +39,32 @@
         <% } %>
 
     <br><br><h2>Reviews</h2>
-    <div>
-        <% book.reviews.forEach(review => { %>
-            <div>
-                Reviewer: <%= review.reviewer.username %>
-                Review: <%= review.review %>
-                Rating: <%= review.rating %>
-            </div>
-        <% }) %>
-    </div>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Reviewer</th>
+                <th>Review</th>
+                <th>Rating (Avg <%= isNaN(rating) ? '-' : rating.toFixed(1) %>)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% book.reviews.forEach(review => { %>
+            <tr>
+                <td><%= review.reviewer?.username %></td>
+                <td><%= review.review %></td>
+                <td><%= review.rating %></td>
+                <td>
+                    <% if(review.reviewer?._id == userId) {%>
+                        <form class="me-3" action="/reviews/delete/<%= book._id %>/<%= review._id %>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-danger" value="Delete this review">
+                        </form>
+                    <% } %>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
 
     <form id="add-review-form" method="POST"
         action="/reviews/<%= book.id %>">
@@ -73,7 +90,7 @@
                         <input  type="text" name="title" value="<%= book.title %>">
                         <input  type="text" name="genre" value="<%= book.genre %>">
                         <input  type="text" name="author" value="<%= book.author %>">
-                        <input  type="text" name="publishedDate" value="<%= book.publishedDate %>">
+                        <input  type="date" name="publishedDate" value="<%= book.publishedDate.toISOString().split('T')[0] %>">
                         <input type="submit" class="btn btn-success" value="Update Book">
                     </fieldset>
                 </form>

@@ -85,7 +85,10 @@ router.get('/:id', async (req, res) => {
         }
     })
         .then(async (result) => {
-            res.render('books/show', { book: result, user: user, username, userId, loggedIn })
+            let rating = 0;
+            result.reviews.forEach(review => rating += review.rating || 0)
+            rating /= result.reviews.length
+            res.render('books/show', { book: result, user: user, username, rating, userId, loggedIn })
         })
         .catch(err => {
             console.log('error', err)
@@ -102,9 +105,9 @@ router.put('/update/:id', (req, res) => {
     updatedBook.owner = userId
 
     Book.findById(bookId)
-        .then(foundBook => {
+        .then(async foundBook => {
             if (foundBook.owner == userId) {
-                return foundBook.updateOne(updatedBook)
+                await foundBook.updateOne(updatedBook)
             } else {
                 res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Update%20this%20Place`)
             }
