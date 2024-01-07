@@ -1,19 +1,19 @@
 <%- include('../partials/header') %>
 
-    <div class="center row text-center">
+    <div class="center row text-center text-light">
         <h2>All <%= username %>'s Books</h2>
         <hr>
-        <table class="table table-striped mt-3">
+        <table class="table-dark table-striped mt-3">
             <thead>
                 <tr>
-                    <th scope="col">Title</th>
+                    <th scope="col" class="fs-2">Title</th>
                 </tr>
             </thead>
             <tbody>
                 <% books.forEach(function(b) {%>
                     <tr>
                         <td scope="row">
-                            <a href="/books/<%= b.id %>" class="btn btn-primary"><%= b.title %></a>
+                            <a href="/books/<%= b.id %>" class="btn btn-primary"><%= b.title %></a><br><br>
                         </td>
                     </tr>
                     <% }) %>

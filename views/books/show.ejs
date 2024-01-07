@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 
 <div class="container center text-center">
-    <h2><%= book.title %></h2>
-    <table class="table table-striped mt-3">
+    <h2 class="text-light"><%= book.title %></h2>
+    <table class="table table-dark table-striped table-bordered mt-3">
         <thead>
             <tr>
                 <th scope="col">Title</th>
@@ -23,13 +23,13 @@
 
 <% if (loggedIn) {%>
     <% if (user.books.indexOf(book.id) === -1) { %>
-        <h5>Add this to your books?</h5>
-        <form action="/books/add" method="POST">
+        <h5 class="text-light">Add this to your books?</h5>
+        <form class="form-control bg-dark" action="/books/add" method="POST">
             <input hidden type="text" name="id" value="<%= book.id %>">
             <input type="submit" class="btn btn-primary" value="Add Book">
         </form>
     <% } else { %>
-        <h5>Remove from My Books?</h5>
+        <h5 class="text-light">Remove from My Books?</h5>
         <form action="/books/remove/<%= book.id %>?_method=DELETE" method="POST">
             <input type="submit" class="btn btn-primary" value="Remove Book">
         </form>
@@ -38,13 +38,13 @@
         <p>Log in to add a book!</p>
         <% } %>
 
-    <br><br><h2>Reviews</h2>
-    <table class="table table-striped mt-3">
+    <br><br><h2 class="text-light">Reviews</h2>
+    <table class="table table-dark table-striped mt-3">
         <thead>
             <tr>
-                <th>Reviewer</th>
-                <th>Review</th>
-                <th>Rating (Avg <%= isNaN(rating) ? '-' : rating.toFixed(1) %>)</th>
+                <th>Reviewer:</th>
+                <th>Review:</th>
+                <th>Rating: (Avg <%= isNaN(rating) ? '-' : rating.toFixed(1) %>)</th>
                 <th></th>
             </tr>
         </thead>
@@ -66,38 +66,38 @@
         </tbody>
     </table>
 
-    <form id="add-review-form" method="POST"
+    <form class="form-control container center bg-dark" id="add-review-form" method="POST"
         action="/reviews/<%= book.id %>">
-        <label>Review:</label>
-        <textarea name="review"></textarea>
-        <label>Rating:</label>
-        <select name="rating">
+        <label class="text-light">Review:</label>
+        <textarea class="form-control" name="review" placeholder="Leave review here"></textarea>
+        <label class="text-light">Rating:</label>
+        <select class="form-select" name="rating">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <input type="submit" value="Add Review">
+        <input class="btn btn-info mt-3" type="submit" value="Add Review">
     </form>
 
 
         <% if (book.owner == userId) {%>
             <hr>
-            <div class="container d-inline-flex justify-content-center">
-                <form class="me-3" action="/books/update/<%= book._id %>?_method=PUT" method="POST">
-                    <fieldset class="form-control">
-                        <input  type="text" name="title" value="<%= book.title %>">
-                        <input  type="text" name="genre" value="<%= book.genre %>">
-                        <input  type="text" name="author" value="<%= book.author %>">
-                        <input  type="date" name="publishedDate" value="<%= book.publishedDate.toISOString().split('T')[0] %>">
+            <div class="container center d-inline-flex justify-content-center">
+                <form class=" form-control bg-dark me-3" action="/books/update/<%= book._id %>?_method=PUT" method="POST">
+                    <fieldset class="input-group mt-3 mb-3 container center">
+                        <input class="form-control" type="text" name="title" value="<%= book.title %>">
+                        <input class="form-control" type="text" name="genre" value="<%= book.genre %>">
+                        <input class="form-control" type="text" name="author" value="<%= book.author %>">
+                        <input class="form-control" type="date" name="publishedDate" value="<%= book.publishedDate.toISOString().split('T')[0] %>">
                         <input type="submit" class="btn btn-success" value="Update Book">
                     </fieldset>
                 </form>
+            </div>
                 <form class="me-3" action="/books/delete/<%= book._id %>?_method=DELETE" method="POST">
                     <input type="submit" class="btn btn-danger" value="Delete this book">
                 </form>
-            </div>
         <% } %>
 <hr>
 <a href="/books" class="btn btn-primary">Back to All Books</a>

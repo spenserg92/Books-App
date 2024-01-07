@@ -1,15 +1,14 @@
 <%- include('../partials/header') %>
 
     <div class="container center">
-        <h2>Add Book</h2>
+        <h2 class="text-center text-light">Add a book to all Books</h2>
         <div class="container d-inline-flex justify-content-center">
-            <form class="mb-3" action="/books" method="post">
-                <fieldset class="form-control">
-                    <label class="form-label" >Title <input class="form-control" type="text" name="title"></label>
-                    <label>Genre <input class="form-control" type="text" name="genre"></label>
-                    <label>Author <input class="form-control" type="text" name="author"></label>
-                    <label>Published Date <input class="form-control" type="date" name="publishedDate"></label>
-                    <hr>
+            <form class="container center" action="/books" method="post">
+                <fieldset class="form-control text-center text-light bg-dark">
+                    <label class="form-label" >Title <input class="form-control" type="text" name="title"></label><br><br>
+                    <label>Genre <input class="form-control" type="text" name="genre"></label><br><br>
+                    <label>Author <input class="form-control" type="text" name="author"></label><br><br>
+                    <label>Published Date <input class="form-control" type="date" name="publishedDate"></label><br><br>
                     <input type="submit" class="btn btn-success" value="Add Book">
                     <a href="/books" class="btn btn-primary">Back to All Books</a>
                 </fieldset>
