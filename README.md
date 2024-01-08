@@ -40,13 +40,16 @@ An app to create a list of books and keep track of favorite books as well as add
 - MongoDB
 - Mongoose
 - Node JS
+- Bootstrap
 
 ## Icebox features
 
-  - Rating system
   - Book Search functionality
   - Statistics page for users
+  - Ability for users to update reviews
   - Author pages for users to see more books from a specific author
+  - Feature to list books in a series and see the series
+  - Admin privileges so only certain users can edit or delete books
 
 
 
